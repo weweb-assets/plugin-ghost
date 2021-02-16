@@ -1,0 +1,168 @@
+<template>
+    <div class="ww-popup-ghost-settings">
+        <div class="ghost-settings__properties" @click="next('GHOST_SYNCHRONIZATION_POPUP')">
+            <wwEditorIcon class="ghost-settings__properties-icon -left" name="download" />
+            <div class="ghost-settings__properties-name paragraph-s">Synchronisation</div>
+            <wwEditorIcon class="ghost-settings__properties-icon -right" name="chevron-forward" />
+        </div>
+        <div class="ghost-settings__properties" @click="next('GHOST_WEBHOOKS_POPUP')">
+            <wwEditorIcon class="ghost-settings__properties-icon -left" name="copy-paste" />
+            <div class="ghost-settings__properties-name paragraph-s">Webhooks</div>
+            <wwEditorIcon class="ghost-settings__properties-icon -right" name="chevron-forward" />
+        </div>
+        <div class="ghost-settings__properties" @click="next('GHOST_ENDPOINTS_POPUP')">
+            <wwEditorIcon class="ghost-settings__properties-icon -left" name="bind" />
+            <div class="ghost-settings__properties-name paragraph-s">Endpoints</div>
+            <wwEditorIcon class="ghost-settings__properties-icon -right" name="chevron-forward" />
+        </div>
+        <div class="ghost-settings__properties" @click="next('GHOST_CONFIGURATION_POPUP')">
+            <wwEditorIcon class="ghost-settings__properties-icon -left" name="advanced" />
+            <div class="ghost-settings__properties-name paragraph-s">Configuration</div>
+            <wwEditorIcon class="ghost-settings__properties-icon -right" name="chevron-forward" />
+        </div>
+        <a class="ghost-settings__properties" href="//developer.weweb.io/" target="_blank">
+            <wwEditorIcon class="ghost-settings__properties-icon -left" name="comment" />
+            <div class="ghost-settings__properties-name paragraph-s">Documentation</div>
+            <wwEditorIcon class="ghost-settings__properties-icon -right" name="chevron-forward" />
+        </a>
+        <div class="ghost-settings__delete-zone danger-zone">
+            <span class="ghost-settings__delete-zone-label">DANGER ZONE</span>
+            <button
+                class="ghost-settings__delete-zone-button ww-editor-button -primary -red -small"
+                @click="deletePlugin"
+            >
+                Delete plugin
+            </button>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'SettingsPopup',
+    props: {
+        options: {
+            type: Object,
+            default() {
+                return {};
+            },
+        },
+    },
+    data() {
+        return {
+            pluginId: undefined,
+            settings: {
+                privateData: {
+                    contentApiKey: '33279d40c8781c9e0fbb6ea44e',
+                    adminApiKey:
+                        '602b9da7ef4cdf003929c798:0e998d1cabd637f9c8d6ee43fc84a7b75654d42f657d0ac469e961f393f0f75e',
+                    url: 'https://markmilastsivy.ghost.io',
+                    endpoints: [],
+                },
+            },
+        };
+    },
+    methods: {
+        next(popup) {
+            this.$emit('next', popup);
+        },
+        async deletePlugin() {
+            const confirm = await wwLib.wwModals.open({
+                title: {
+                    en: 'Delete plugin Ghost?',
+                    fr: 'Supprimer le plugin Ghost ?',
+                },
+                text: {
+                    en: 'Are you sure you want to delete the plugin from your website?',
+                    fr: 'Voulez-vous vraiment supprimer le plugin de votre site ?',
+                },
+                buttons: [
+                    {
+                        text: {
+                            en: 'Cancel',
+                            fr: 'Annuler',
+                        },
+                        color: '-secondary',
+                        value: false,
+                        escape: true,
+                    },
+                    {
+                        text: {
+                            en: 'Delete',
+                            fr: 'Supprimer',
+                        },
+                        color: '-primary -red',
+                        value: true,
+                        enter: true,
+                    },
+                ],
+            });
+            if (!confirm) return;
+            await wwLib.wwPlugin.deleteDesignPlugin(this.pluginId);
+        },
+    },
+    created() {
+        this.pluginId = this.options.data.pluginId;
+        this.settings = this.options.data.settings;
+    },
+};
+</script>
+
+<style scoped lang="scss">
+.ww-popup-ghost-settings {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--ww-spacing-03) 0;
+    .ghost-settings {
+        &__input {
+            margin-bottom: var(--ww-spacing-03);
+        }
+        &__row {
+            display: flex;
+            align-items: center;
+        }
+        &__delete-zone {
+            margin-top: auto;
+            &-label {
+                width: 100%;
+                font-size: var(--ww-font-size-04);
+                color: var(--ww-color-red-500);
+            }
+            &-button {
+                margin-top: var(--ww-spacing-02);
+                margin-right: var(--ww-spacing-02);
+            }
+        }
+        &__properties {
+            display: flex;
+            align-items: center;
+            padding: var(--ww-spacing-02) 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: var(--ww-border-radius-02);
+            margin-bottom: var(--ww-spacing-01);
+            &-name {
+                margin-left: var(--ww-spacing-01);
+            }
+
+            &-content {
+                margin-left: auto;
+                color: var(--ww-color-dark-400);
+            }
+            &-icon {
+                &.-left {
+                    margin-right: var(--ww-spacing-01);
+                }
+                &.-right {
+                    margin-left: auto;
+                    margin-right: var(--ww-spacing-01);
+                }
+            }
+            &:hover {
+                background-color: var(--ww-color-dark-200);
+            }
+        }
+    }
+}
+</style>
