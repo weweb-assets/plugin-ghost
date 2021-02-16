@@ -8,7 +8,7 @@
             </button>
             <a
                 class="ww-editor-button -secondary -small m-left"
-                :href="`//${settings.privateData.url}/admin/webhooks`"
+                :href="`//${settings.privateData.url}/ghost/#/settings/integrations`"
                 target="_blank"
             >
                 <wwEditorIcon class="ww-editor-button-icon -left" name="open-out" small />

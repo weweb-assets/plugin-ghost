@@ -80,14 +80,16 @@ export default {
                 await wwLib.wwPlugin.saveCmsDataSet(
                     this.settings.id,
                     endpoint.id,
-                    endpoint.name,
+                    endpoint.name || `${endpoint.ressource} (${endpoint.method})`,
                     endpoint.displayBy,
                     'Ghost'
                 );
 
                 wwLib.wwNotification.open({
                     text: {
-                        en: `Endpoint "${endpoint.name}" succesfully fetched`,
+                        en: `Endpoint "${
+                            endpoint.name || `${endpoint.ressource} (${endpoint.method})`
+                        }" succesfully fetched`,
                     },
                     color: 'green',
                 });
