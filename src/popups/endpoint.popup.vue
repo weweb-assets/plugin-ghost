@@ -153,32 +153,32 @@
                 </div>
             </div>
             <div class="ghost-endpoint__row ghost-endpoint__input">
-                <label class="ghost-endpoint__label caption-s" for="endpoint-view"> Sort </label>
-                <button class="ww-editor-button -primary -small m-auto-left" @click="addSort" :disabled="!isSetup">
-                    Add a field to sort by
+                <label class="ghost-endpoint__label caption-s" for="endpoint-view"> Order </label>
+                <button class="ww-editor-button -primary -small m-auto-left" @click="addOrder" :disabled="!isSetup">
+                    Add a field to order by
                 </button>
             </div>
             <div
                 class="ghost-endpoint__row -space-between ghost-endpoint__input"
-                v-for="(sort, index) in endpoint.sort"
+                v-for="(order, index) in endpoint.order"
                 :key="index"
             >
-                <div class="caption-s" v-if="!index">Sort by</div>
+                <div class="caption-s" v-if="!index">Order by</div>
                 <div class="caption-s" v-else>then by</div>
                 <input
                     type="text"
                     class="caption-m ww-editor-input"
-                    v-model="sort.field"
+                    v-model="order.field"
                     :disabled="!isSetup"
                     placeholder="Field"
                 />
                 <wwEditorSelect
                     class="ghost-endpoint__select"
                     :options="directionOptions"
-                    :value="sort.direction"
-                    @input="updateSort(sort, $event)"
+                    :value="order.direction"
+                    @input="updateOrder(order, $event)"
                 />
-                <div class="ghost-endpoint__button-delete" @click="deleteSort(index)">
+                <div class="ghost-endpoint__button-delete" @click="deleteOrder(index)">
                     <wwEditorIcon name="delete" small />
                 </div>
             </div>
@@ -225,7 +225,7 @@ export default {
                 filter: undefined,
                 limit: undefined,
                 page: undefined,
-                sort: [],
+                order: [],
             },
         };
     },
@@ -251,17 +251,17 @@ export default {
         },
     },
     methods: {
-        addSort() {
-            if (!this.endpoint.sort) this.endpoint.sort = [];
-            this.endpoint.sort.push({ field: '', direction: 'asc' });
+        addOrder() {
+            if (!this.endpoint.order) this.endpoint.order = [];
+            this.endpoint.order.push({ field: '', direction: 'asc' });
             this.$forceUpdate();
         },
-        updateSort(sort, event) {
-            sort.direction = event;
+        updateOrder(order, event) {
+            order.direction = event;
             this.$forceUpdate();
         },
-        deleteSort(index) {
-            this.endpoint.sort.splice(index, 1);
+        deleteOrder(index) {
+            this.endpoint.order.splice(index, 1);
             this.$forceUpdate();
         },
     },
