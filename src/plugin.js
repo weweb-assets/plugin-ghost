@@ -11,9 +11,9 @@ export default {
         id: wwLib.wwUtils.getUid(),
         data: {},
         privateData: {
-            contentApiKey: '33279d40c8781c9e0fbb6ea44e',
-            adminApiKey: '602b9da7ef4cdf003929c798:0e998d1cabd637f9c8d6ee43fc84a7b75654d42f657d0ac469e961f393f0f75e',
-            url: 'https://markmilastsivy.ghost.io',
+            contentApiKey: '',
+            adminApiKey: '',
+            url: '',
             endpoints: [],
         },
     },

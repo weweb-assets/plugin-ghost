@@ -11,7 +11,7 @@
                     <template v-if="getSource(endpoint).lastSyncDate">
                         {{ getSource(endpoint).lastSyncDate | dateFromNow }}
                     </template>
-                    <template v-else>Endpoint never synchronized</template>
+                    <template v-else>never synchronized</template>
                 </template>
             </div>
             <button
