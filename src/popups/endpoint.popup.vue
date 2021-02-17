@@ -27,7 +27,7 @@
             <template v-if="endpoint.method !== 'browse'">
                 <div class="ghost-endpoint__row-item">
                     <label class="ghost-endpoint__label caption-s" for="param-ghost">
-                        {{ endpoint.method }}
+                        <span class="capitalize">{{ endpoint.method }}</span>
                         <div class="ghost-endpoint__label-required">required</div>
                     </label>
                     <input
@@ -220,7 +220,7 @@ export default {
                 include: {
                     authors: false,
                     tags: false,
-                    posts: false,
+                    'count.posts': false,
                 },
                 filter: undefined,
                 limit: undefined,
@@ -286,7 +286,6 @@ export default {
             font-weight: 500;
             color: var(--ww-color-dark-500);
             margin-bottom: var(--ww-spacing-01);
-            text-transform: capitalize;
             &-required {
                 margin-left: auto;
                 text-transform: none;
@@ -334,6 +333,9 @@ export default {
     }
     .m-left {
         margin-left: var(--ww-spacing-02);
+    }
+    .capitalize {
+        text-transform: capitalize;
     }
 }
 </style>
