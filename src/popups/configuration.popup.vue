@@ -1,7 +1,26 @@
 <template>
     <div class="ww-popup-ghost-configuration">
+        <label class="ghost-configuration__label caption-s" for="url">
+            URL
+            <div class="ghost-configuration__label-required">required</div>
+        </label>
+        <input
+            type="text"
+            name="url"
+            class="ghost-configuration__input caption-m ww-editor-input -large"
+            placeholder="https://my-ghost.ghost.io"
+            v-model="settings.privateData.url"
+        />
         <label class="ghost-configuration__label caption-s" for="content-api-key">
             Content API key
+            <a
+                v-if="settings.privateData.url"
+                class="ghost-endpoint__link"
+                :href="`${settings.privateData.url}/ghost/#/settings/integrations`"
+                target="_blank"
+            >
+                Find it here
+            </a>
             <div class="ghost-configuration__label-required">required</div>
         </label>
         <input
@@ -13,6 +32,14 @@
         />
         <label class="ghost-configuration__label caption-s" for="admin-api-key">
             Admin API key
+            <a
+                v-if="settings.privateData.url"
+                class="ghost-endpoint__link"
+                :href="`${settings.privateData.url}/ghost/#/settings/integrations`"
+                target="_blank"
+            >
+                Find it here
+            </a>
             <div class="ghost-configuration__label-required">required</div>
         </label>
         <input
@@ -21,17 +48,6 @@
             class="ghost-configuration__input caption-m ww-editor-input -large"
             placeholder="Key"
             v-model="settings.privateData.adminApiKey"
-        />
-        <label class="ghost-configuration__label caption-s" for="api-url">
-            API URL
-            <div class="ghost-configuration__label-required">required</div>
-        </label>
-        <input
-            type="text"
-            name="api-url"
-            class="ghost-configuration__input caption-m ww-editor-input -large"
-            placeholder="https://my-ghost.ghost.io"
-            v-model="settings.privateData.url"
         />
     </div>
 </template>
