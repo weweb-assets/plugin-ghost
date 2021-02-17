@@ -5,10 +5,11 @@
             <div class="ghost-endpoint__label-required">required</div>
         </label>
         <wwEditorSelect
-            class="ghost-endpoint__input -large"
+            class="caption-m ghost-endpoint__input"
             :options="ressourcesOptions"
             v-model="endpoint.ressource"
             placeholder="Select a ressource"
+            large
         />
         <div class="ghost-endpoint__row -space-between">
             <div class="ghost-endpoint__row-item">
@@ -17,11 +18,12 @@
                     <div class="ghost-endpoint__label-required">required</div>
                 </label>
                 <wwEditorSelect
-                    class="ghost-endpoint__input -large"
+                    class="caption-m ghost-endpoint__input"
                     :options="methodsOptions"
                     v-model="endpoint.method"
                     placeholder="Select a method"
                     :disabled="!isSetup"
+                    large
                 />
             </div>
             <template v-if="endpoint.method !== 'browse'">
@@ -173,7 +175,7 @@
                     placeholder="Field"
                 />
                 <wwEditorSelect
-                    class="ghost-endpoint__select"
+                    class="caption-m ghost-endpoint__select"
                     :options="directionOptions"
                     :value="order.direction"
                     @input="updateOrder(order, $event)"

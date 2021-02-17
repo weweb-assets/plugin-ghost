@@ -128,6 +128,10 @@ export default {
                 color: var(--ww-color-dark-400);
             }
         }
+        &__link {
+            color: var(--ww-color-blue-500);
+            margin-left: var(--ww-spacing-02);
+        }
         &__input {
             margin-bottom: var(--ww-spacing-03);
         }
