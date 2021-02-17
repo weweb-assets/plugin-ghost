@@ -15,7 +15,7 @@
             Content API key
             <a
                 v-if="settings.privateData.url"
-                class="ghost-endpoint__link"
+                class="ghost-configuration__link"
                 :href="`${settings.privateData.url}/ghost/#/settings/integrations`"
                 target="_blank"
             >
@@ -34,7 +34,7 @@
             Admin API key
             <a
                 v-if="settings.privateData.url"
-                class="ghost-endpoint__link"
+                class="ghost-configuration__link"
                 :href="`${settings.privateData.url}/ghost/#/settings/integrations`"
                 target="_blank"
             >
