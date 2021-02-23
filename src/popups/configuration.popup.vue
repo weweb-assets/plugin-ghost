@@ -85,6 +85,8 @@ export default {
         async beforeNext() {
             this.options.setLoadingStatus(true);
             try {
+                if (this.settings.privateData.url.endsWith('/'))
+                    this.settings.privateData.url = this.settings.privateData.url.slice(0, -1);
                 const plugin = wwLib.wwPlugins.pluginGhost;
                 plugin.settings = await wwLib.wwPlugin.saveSettings(
                     plugin.id,
