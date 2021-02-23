@@ -28,8 +28,11 @@ export default {
         if (!plugin.settings.privateData.adminApiKey) plugin.settings.privateData.adminApiKey = '';
         if (!plugin.settings.privateData.endpoints) plugin.settings.privateData.url = '';
         if (!plugin.settings.privateData.endpoints) plugin.settings.privateData.endpoints = [];
-        const { contentApiKey, adminApiKey, url } = plugin.settings.privateData;
-        if (!contentApiKey.length || !adminApiKey.length || !url.length) {
+        if (
+            !plugin.settings.privateData.contentApiKey.length ||
+            !plugin.settings.privateData.adminApiKey.length ||
+            !plugin.settings.privateData.url.length
+        ) {
             this.sidebarButton();
         }
         /* wwEditor:end */
@@ -41,10 +44,13 @@ export default {
     async sidebarButton() {
         try {
             const { id, settings } = wwLib.wwPlugins.pluginGhost;
-            const { contentApiKey, adminApiKey, url } = settings.privateData;
-            const isFirstTime = !contentApiKey.length || !adminApiKey.length || !url.length;
+            const isSetup =
+                !settings.privateData.contentApiKey.length ||
+                !settings.privateData.adminApiKey.length ||
+                !settings.privateData.url.length;
+            const isFirstTime = !settings.privateData.endpoints.length;
             await wwLib.wwPopups.open({
-                firstPage: settings.privateData.url ? 'GHOST_POPUP' : 'GHOST_CONFIGURATION_POPUP',
+                firstPage: isSetup ? 'GHOST_POPUP' : 'GHOST_CONFIGURATION_POPUP',
                 data: {
                     isFirstTime,
                     pluginId: id,
