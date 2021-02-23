@@ -78,7 +78,7 @@ export default {
     computed: {
         isSetup() {
             const { contentApiKey, adminApiKey, url } = this.settings.privateData;
-            return contentApiKey.length && adminApiKey.length && url.length;
+            return contentApiKey && contentApiKey.length && adminApiKey && adminApiKey.length && url && url.length;
         },
     },
     methods: {
