@@ -26,7 +26,7 @@ export default {
         if (plugin.id) plugin.settings = (await wwLib.wwPlugin.getSettings(plugin.id)) || this.settings;
         if (!plugin.settings.privateData.contentApiKey) plugin.settings.privateData.contentApiKey = '';
         if (!plugin.settings.privateData.adminApiKey) plugin.settings.privateData.adminApiKey = '';
-        if (!plugin.settings.privateData.endpoints) plugin.settings.privateData.url = '';
+        if (!plugin.settings.privateData.url) plugin.settings.privateData.url = '';
         if (!plugin.settings.privateData.endpoints) plugin.settings.privateData.endpoints = [];
         if (
             !plugin.settings.privateData.contentApiKey.length ||
