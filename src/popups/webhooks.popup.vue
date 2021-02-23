@@ -32,12 +32,7 @@ export default {
     data() {
         return {
             settings: {
-                privateData: {
-                    contentApiKey: '',
-                    adminApiKey: '',
-                    url: '',
-                    endpoints: [],
-                },
+                privateData: {},
             },
         };
     },
@@ -58,7 +53,7 @@ export default {
         },
     },
     created() {
-        this.settings = _.cloneDeep(this.options.data.settings || this.settings);
+        this.settings = this.options.data.settings;
     },
 };
 </script>

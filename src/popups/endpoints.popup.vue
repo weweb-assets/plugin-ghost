@@ -27,14 +27,19 @@ export default {
     data() {
         return {
             settings: {
-                privateData: {
-                    contentApiKey: '',
-                    adminApiKey: '',
-                    url: '',
-                    endpoints: [],
-                },
+                privateData: {},
             },
         };
+    },
+    watch: {
+        isSetup() {
+            this.options.setButtonState('SAVE', this.isSetup ? 'ok' : 'disabled');
+        },
+    },
+    computed: {
+        isSetup() {
+            return this.settings.privateData.endpoints && this.settings.privateData.endpoints.length;
+        },
     },
     methods: {
         async addEndpoint() {
@@ -59,7 +64,38 @@ export default {
                 wwLib.wwLog.error(err);
             }
         },
-        deleteEndpoint(index) {
+        async deleteEndpoint(index) {
+            const confirm = await wwLib.wwModals.open({
+                title: {
+                    en: 'Delete data source?',
+                    fr: 'Supprimer la source de données?',
+                },
+                text: {
+                    en: 'Are you sure you want to delete the data source?',
+                    fr: 'Voulez-vous vraiment supprimer la source de données ?',
+                },
+                buttons: [
+                    {
+                        text: {
+                            en: 'Cancel',
+                            fr: 'Annuler',
+                        },
+                        color: '-secondary',
+                        value: false,
+                        escape: true,
+                    },
+                    {
+                        text: {
+                            en: 'Delete',
+                            fr: 'Supprimer',
+                        },
+                        color: '-primary -red',
+                        value: true,
+                        enter: true,
+                    },
+                ],
+            });
+            if (!confirm) return;
             this.settings.privateData.endpoints.splice(index, 1);
         },
         async beforeNext() {
@@ -91,6 +127,7 @@ export default {
     created() {
         this.settings = _.cloneDeep(this.options.data.settings || this.settings);
         this.options.result.settings = this.settings;
+        this.options.setButtonState('SAVE', this.isSetup ? 'ok' : 'disabled');
     },
 };
 </script>

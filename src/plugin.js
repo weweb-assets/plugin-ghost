@@ -8,7 +8,6 @@ export default {
         Data
     \================================================================================================*/
     settings: {
-        id: wwLib.wwUtils.getUid(),
         data: {},
         privateData: {
             contentApiKey: '',
@@ -25,6 +24,11 @@ export default {
         /* wwEditor:start */
         const plugin = wwLib.wwPlugins.pluginGhost;
         if (plugin.id) plugin.settings = (await wwLib.wwPlugin.getSettings(plugin.id)) || this.settings;
+        if (!plugin.settings.privateData.endpoints) plugin.settings.privateData.endpoints = [];
+        if (!plugin.settings.privateData.url) {
+            plugin.settings.privateData.url = '';
+            this.sidebarButton();
+        }
         /* wwEditor:end */
     },
     /* wwEditor:start */
@@ -37,6 +41,7 @@ export default {
             await wwLib.wwPopups.open({
                 firstPage: settings.privateData.url ? 'GHOST_POPUP' : 'GHOST_CONFIGURATION_POPUP',
                 data: {
+                    isFirstTime: !settings.privateData.url,
                     pluginId: id,
                     settings,
                 },

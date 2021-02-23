@@ -66,12 +66,7 @@ export default {
     data() {
         return {
             settings: {
-                privateData: {
-                    contentApiKey: '',
-                    adminApiKey: '',
-                    url: '',
-                    endpoints: [],
-                },
+                privateData: {},
             },
         };
     },
@@ -106,6 +101,7 @@ export default {
     created() {
         this.settings = this.options.data.settings || this.settings;
         this.options.result.settings = this.settings;
+        this.options.setButtonState('SAVE', this.isSetup ? 'ok' : 'disabled');
     },
 };
 </script>

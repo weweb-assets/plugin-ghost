@@ -51,14 +51,7 @@ export default {
     data() {
         return {
             pluginId: undefined,
-            settings: {
-                privateData: {
-                    contentApiKey: '',
-                    adminApiKey: '',
-                    url: '',
-                    endpoints: [],
-                },
-            },
+            settings: {},
         };
     },
     methods: {
