@@ -45,9 +45,9 @@ export default {
         try {
             const { id, settings } = wwLib.wwPlugins.pluginGhost;
             const isSetup =
-                !settings.privateData.contentApiKey.length ||
-                !settings.privateData.adminApiKey.length ||
-                !settings.privateData.url.length;
+                settings.privateData.contentApiKey.length &&
+                settings.privateData.adminApiKey.length &&
+                settings.privateData.url.length;
             const isFirstTime = !settings.privateData.endpoints.length;
             await wwLib.wwPopups.open({
                 firstPage: isSetup ? 'GHOST_POPUP' : 'GHOST_CONFIGURATION_POPUP',
