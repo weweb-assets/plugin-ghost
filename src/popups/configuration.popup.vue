@@ -13,12 +13,7 @@
         />
         <label class="ghost-configuration__label caption-s" for="content-api-key">
             Content API key
-            <a
-                v-if="settings.privateData.url"
-                class="ghost-configuration__link"
-                :href="`${settings.privateData.url}/ghost/#/settings/integrations`"
-                target="_blank"
-            >
+            <a v-if="settings.privateData.url" class="ghost-configuration__link" :href="integrationUrl" target="_blank">
                 Find it here
             </a>
             <div class="ghost-configuration__label-required">required</div>
@@ -32,12 +27,7 @@
         />
         <label class="ghost-configuration__label caption-s" for="admin-api-key">
             Admin API key
-            <a
-                v-if="settings.privateData.url"
-                class="ghost-configuration__link"
-                :href="`${settings.privateData.url}/ghost/#/settings/integrations`"
-                target="_blank"
-            >
+            <a v-if="settings.privateData.url" class="ghost-configuration__link" :href="integrationUrl" target="_blank">
                 Find it here
             </a>
             <div class="ghost-configuration__label-required">required</div>
@@ -79,6 +69,11 @@ export default {
         isSetup() {
             const { contentApiKey, adminApiKey, url } = this.settings.privateData;
             return contentApiKey && contentApiKey.length && adminApiKey && adminApiKey.length && url && url.length;
+        },
+        integrationUrl() {
+            let url = this.settings.privateData.url;
+            if (url.endsWith('/')) url = url.slice(0, -1);
+            return `${url}/ghost/#/settings/integrations`;
         },
     },
     methods: {
