@@ -29,9 +29,10 @@ export default {
         if (!plugin.settings.privateData.url) plugin.settings.privateData.url = '';
         if (!plugin.settings.privateData.endpoints) plugin.settings.privateData.endpoints = [];
         if (
-            !plugin.settings.privateData.contentApiKey.length ||
-            !plugin.settings.privateData.adminApiKey.length ||
-            !plugin.settings.privateData.url.length
+            plugin.isNew &&
+            (!plugin.settings.privateData.contentApiKey.length ||
+                !plugin.settings.privateData.adminApiKey.length ||
+                !plugin.settings.privateData.url.length)
         ) {
             this.sidebarButton();
         }
