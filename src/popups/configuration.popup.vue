@@ -39,6 +39,15 @@
             placeholder="Key"
             v-model="settings.privateData.adminApiKey"
         />
+        <div class="ghost-configuration__delete-zone danger-zone">
+            <span class="ghost-configuration__delete-zone-label">DANGER ZONE</span>
+            <button
+                class="ghost-configuration__delete-zone-button ww-editor-button -primary -red -small"
+                @click="deletePlugin"
+            >
+                Delete plugin
+            </button>
+        </div>
     </div>
 </template>
 
@@ -77,6 +86,41 @@ export default {
         },
     },
     methods: {
+        async deletePlugin() {
+            const plugin = wwLib.wwPlugins.pluginGhost;
+            const confirm = await wwLib.wwModals.open({
+                title: {
+                    en: 'Delete plugin Ghost?',
+                    fr: 'Supprimer le plugin Ghost ?',
+                },
+                text: {
+                    en: 'Are you sure you want to delete the plugin from your website?',
+                    fr: 'Voulez-vous vraiment supprimer le plugin de votre site ?',
+                },
+                buttons: [
+                    {
+                        text: {
+                            en: 'Cancel',
+                            fr: 'Annuler',
+                        },
+                        color: '-secondary',
+                        value: false,
+                        escape: true,
+                    },
+                    {
+                        text: {
+                            en: 'Delete',
+                            fr: 'Supprimer',
+                        },
+                        color: '-primary -red',
+                        value: true,
+                        enter: true,
+                    },
+                ],
+            });
+            if (!confirm) return;
+            await wwLib.wwPlugin.deleteDesignPlugin(plugin.id);
+        },
         async beforeNext() {
             this.options.setLoadingStatus(true);
             try {
@@ -127,6 +171,18 @@ export default {
         }
         &__input {
             margin-bottom: var(--ww-spacing-03);
+        }
+        &__delete-zone {
+            margin-top: auto;
+            &-label {
+                width: 100%;
+                font-size: var(--ww-font-size-04);
+                color: var(--ww-color-red-500);
+            }
+            &-button {
+                margin-top: var(--ww-spacing-02);
+                margin-right: var(--ww-spacing-02);
+            }
         }
     }
 }
