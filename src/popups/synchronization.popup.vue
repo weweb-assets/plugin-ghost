@@ -71,33 +71,7 @@ export default {
         },
         async sync(endpoint) {
             this.endpointFetching(endpoint, true);
-            try {
-                await wwLib.wwPlugin.saveCmsDataSet(
-                    this.settings.id,
-                    endpoint.id,
-                    endpoint.name || `${endpoint.ressource} (${endpoint.method})`,
-                    endpoint.displayBy,
-                    'Ghost'
-                );
-
-                wwLib.wwNotification.open({
-                    text: {
-                        en: `Endpoint "${
-                            endpoint.name || `${endpoint.ressource} (${endpoint.method})`
-                        }" succesfully fetched`,
-                    },
-                    color: 'green',
-                });
-            } catch (err) {
-                wwLib.wwNotification.open({
-                    text: {
-                        en: 'An error occured, please try again later.',
-                        fr: 'Une erreur est survenue. Veuillez réessayer plus tard.',
-                    },
-                    color: 'red',
-                });
-                wwLib.wwLog.error(err);
-            }
+            await wwLib.wwPlugins.pluginGhost.sync(endpoint);
             this.endpointFetching(endpoint, false);
         },
         async syncAll() {

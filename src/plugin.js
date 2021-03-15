@@ -40,6 +40,41 @@ export default {
     },
     /* wwEditor:start */
     /*=============================================m_ÔÔ_m=============================================\
+        SYNCHRONIZE
+    \================================================================================================*/
+    async sync(endpoint) {
+        try {
+            await wwLib.wwPlugin.saveCmsDataSet(
+                this.settings.id,
+                endpoint.id,
+                endpoint.name || `${endpoint.ressource} (${endpoint.method})`,
+                endpoint.displayBy,
+                'Ghost'
+            );
+
+            wwLib.wwNotification.open({
+                text: {
+                    en: `Endpoint "${
+                        endpoint.name || `${endpoint.ressource} (${endpoint.method})`
+                    }" succesfully fetched`,
+                },
+                color: 'green',
+            });
+        } catch (err) {
+            wwLib.wwNotification.open({
+                text: {
+                    en: 'An error occured, please try again later.',
+                    fr: 'Une erreur est survenue. Veuillez réessayer plus tard.',
+                },
+                color: 'red',
+            });
+            wwLib.wwLog.error(err);
+        }
+    },
+    async syncAll() {
+        for (const endpoint of this.settings.privateData.endpoints) await this.sync(endpoint);
+    },
+    /*=============================================m_ÔÔ_m=============================================\
         SIDEBAR POPUP
     \================================================================================================*/
     async sidebarButton() {
