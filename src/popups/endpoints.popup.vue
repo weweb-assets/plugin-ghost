@@ -1,12 +1,12 @@
 <template>
-    <div class="ww-popup-ghost-content-types">
-        <button class="ghost-content-types__all ww-editor-button -primary" @click="addEndpoint">Add endpoint</button>
-        <div class="ghost-content-types__row" v-for="(endpoint, index) in settings.privateData.endpoints" :key="index">
+    <div class="ww-popup-ghost-endpoints">
+        <button class="ghost-endpoints__all ww-editor-button -primary" @click="addEndpoint">Add endpoint</button>
+        <div class="ghost-endpoints__row" v-for="(endpoint, index) in settings.privateData.endpoints" :key="index">
             <div class="paragraph-m">{{ endpoint.name || `${endpoint.ressource} (${endpoint.method})` }}</div>
             <button class="ww-editor-button -secondary -small m-auto-left" @click="editEndpoint(index, endpoint)">
                 Edit
             </button>
-            <div class="ghost-content-types__button-delete m-left" @click="deleteEndpoint(index)">
+            <div class="ghost-endpoints__button-delete m-left" @click="deleteEndpoint(index)">
                 <wwEditorIcon name="delete" small />
             </div>
         </div>
@@ -135,12 +135,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.ww-popup-ghost-content-types {
+.ww-popup-ghost-endpoints {
     position: relative;
     display: flex;
     flex-direction: column;
     padding: var(--ww-spacing-03) 0;
-    .ghost-content-types {
+    .ghost-endpoints {
         &__all {
             margin: 0 auto var(--ww-spacing-02) auto;
         }
