@@ -8,6 +8,7 @@
                 :value="settings.privateData.url"
                 @input="updatePrivateData('url', $event)"
                 v-on:keyup.native.enter="$emit('save')"
+                large
             />
         </wwEditorFormRow>
         <wwEditorFormRow required label="Content API key">
@@ -21,6 +22,7 @@
                 :value="settings.privateData.contentApiKey"
                 @input="updatePrivateData('contentApiKey', $event)"
                 v-on:keyup.native.enter="$emit('save')"
+                large
             />
         </wwEditorFormRow>
         <wwEditorFormRow required label="Admin API key">
@@ -34,6 +36,7 @@
                 :value="settings.privateData.adminApiKey"
                 @input="updatePrivateData('adminApiKey', $event)"
                 v-on:keyup.native.enter="$emit('save')"
+                large
             />
         </wwEditorFormRow>
     </div>

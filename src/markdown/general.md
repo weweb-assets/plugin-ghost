@@ -2,4 +2,4 @@
 
 This plugin will add:
 
-Airtable as a collection source
+Ghost as a collection source
