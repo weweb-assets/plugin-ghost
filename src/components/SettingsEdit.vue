@@ -6,7 +6,7 @@
                 name="url"
                 placeholder="https://my-ghost.ghost.io"
                 :value="settings.privateData.url"
-                @input="updatePrivateData('url', $event)"
+                @input="setPrivateProp('url', $event)"
                 v-on:keyup.native.enter="$emit('save')"
                 large
             />
@@ -20,7 +20,7 @@
                 name="content-api-key"
                 placeholder="Key"
                 :value="settings.privateData.contentApiKey"
-                @input="updatePrivateData('contentApiKey', $event)"
+                @input="setPrivateProp('contentApiKey', $event)"
                 v-on:keyup.native.enter="$emit('save')"
                 large
             />
@@ -34,7 +34,7 @@
                 name="admin-api-key"
                 placeholder="Key"
                 :value="settings.privateData.adminApiKey"
-                @input="updatePrivateData('adminApiKey', $event)"
+                @input="setPrivateProp('adminApiKey', $event)"
                 v-on:keyup.native.enter="$emit('save')"
                 large
             />
@@ -68,7 +68,7 @@ export default {
         },
     },
     methods: {
-        updatePrivateData(key, value) {
+        setPrivateProp(key, value) {
             this.$emit('update-settings', {
                 ...this.settings,
                 privateData: { ...this.settings.privateData, [key]: value },

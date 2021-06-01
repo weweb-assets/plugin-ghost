@@ -4,7 +4,7 @@
             <wwEditorSelect
                 :options="ressourcesOptions"
                 :value="endpoint.ressource"
-                @input="updateEndpoint('ressource', $event)"
+                @input="setProp('ressource', $event)"
                 placeholder="Select a ressource"
                 large
             />
@@ -14,7 +14,7 @@
                 <wwEditorSelect
                     :options="methodsOptions"
                     :value="endpoint.method"
-                    @change="updateEndpoint('method', $event)"
+                    @change="setProp('method', $event)"
                     placeholder="Select a method"
                     large
                 />
@@ -24,7 +24,7 @@
                     type="text"
                     name="param"
                     :value="endpoint.param"
-                    @input="updateEndpoint('param', $event)"
+                    @input="setProp('param', $event)"
                     :placeholder="endpoint.method"
                     large
                 />
@@ -57,7 +57,7 @@
                 name="fields"
                 placeholder="title, slug, url"
                 :value="endpoint.fields"
-                @input="updateEndpoint('fields', $event)"
+                @input="setProp('fields', $event)"
                 large
             />
         </wwEditorFormRow>
@@ -77,7 +77,7 @@
                     name="filter"
                     placeholder="featured:true"
                     :input="endpoint.filterByFormula"
-                    @input="updateEndpoint('filterByFormula', $event)"
+                    @input="setProp('filterByFormula', $event)"
                     large
                 />
             </wwEditorFormRow>
@@ -97,7 +97,7 @@
                         name="limit"
                         placeholder="default: 15"
                         :value="endpoint.limit"
-                        @input="updateEndpoint('limit', $event)"
+                        @input="setProp('limit', $event)"
                         large
                     />
                 </wwEditorFormRow>
@@ -116,7 +116,7 @@
                         name="page"
                         placeholder="default: first 15 record"
                         :value="endpoint.page"
-                        @input="updateEndpoint('page', $event)"
+                        @input="setProp('page', $event)"
                         large
                     />
                 </wwEditorFormRow>
@@ -141,18 +141,18 @@
                     <wwEditorFormInput
                         type="text"
                         :value="order.field"
-                        @input="updateOrder(index, { field: $event })"
+                        @input="setOrderProp(index, { field: $event })"
                         placeholder="Field"
                         :disabled="!isSetup"
                     />
                     <wwEditorSelect
                         :options="directionOptions"
                         :value="order.direction"
-                        @input="updateOrder(index, { direction: $event })"
+                        @input="setOrderProp(index, { direction: $event })"
                     />
-                    <div class="ghost-collection-edit__button-delete" @click="deleteOrder(index)">
-                        <wwEditorIcon name="delete" small />
-                    </div>
+                    <button class="ww-editor-button -tertiary -small -icon -red" @click="deleteOrder(index)">
+                        <wwEditorIcon class="ww-editor-button-icon" name="delete" small />
+                    </button>
                 </div>
             </wwEditorFormRow>
         </template>
@@ -225,19 +225,19 @@ export default {
         addOrder() {
             const orders = _.cloneDeep(this.endpoint.order || []);
             orders.push({ field: '', direction: 'asc' });
-            this.updateEndpoint('order', orders);
+            this.setProp('order', orders);
         },
-        updateOrder(index, value) {
+        setOrderProp(index, value) {
             const orders = _.cloneDeep(this.endpoint.order);
             orders.splice(index, 1, { ...orders[index], ...value });
-            this.updateEndpoint('order', orders);
+            this.setProp('order', orders);
         },
         deleteOrder(index) {
             const orders = _.cloneDeep(this.endpoint.order);
             orders.splice(index, 1);
-            this.updateEndpoint('order', orders);
+            this.setProp('order', orders);
         },
-        updateEndpoint(key, value) {
+        setProp(key, value) {
             this.$emit('update-config', { ...this.endpoint, [key]: value });
         },
     },
@@ -263,14 +263,6 @@ export default {
         }
         .-full {
             width: 100%;
-        }
-    }
-    &__button-delete {
-        margin-right: var(--ww-spacing-03);
-        cursor: pointer;
-        transition: color 0.3s ease;
-        &:hover {
-            color: var(--ww-color-red-500);
         }
     }
     .m-auto-left {
