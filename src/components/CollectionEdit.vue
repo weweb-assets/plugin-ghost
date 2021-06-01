@@ -26,6 +26,7 @@
                     :value="endpoint.param"
                     @input="setProp('param', $event)"
                     :placeholder="endpoint.method"
+                    v-on:keyup.native.enter="$emit('next')"
                     large
                 />
             </wwEditorFormRow>
@@ -58,6 +59,7 @@
                 placeholder="title, slug, url"
                 :value="endpoint.fields"
                 @input="setProp('fields', $event)"
+                v-on:keyup.native.enter="$emit('next')"
                 large
             />
         </wwEditorFormRow>
@@ -76,8 +78,9 @@
                     type="text"
                     name="filter"
                     placeholder="featured:true"
-                    :input="endpoint.filterByFormula"
+                    :value="endpoint.filterByFormula"
                     @input="setProp('filterByFormula', $event)"
+                    v-on:keyup.native.enter="$emit('next')"
                     large
                 />
             </wwEditorFormRow>
@@ -98,6 +101,7 @@
                         placeholder="default: 15"
                         :value="endpoint.limit"
                         @input="setProp('limit', $event)"
+                        v-on:keyup.native.enter="$emit('next')"
                         large
                     />
                 </wwEditorFormRow>
@@ -117,6 +121,7 @@
                         placeholder="default: first 15 record"
                         :value="endpoint.page"
                         @input="setProp('page', $event)"
+                        v-on:keyup.native.enter="$emit('next')"
                         large
                     />
                 </wwEditorFormRow>
@@ -143,7 +148,7 @@
                         :value="order.field"
                         @input="setOrderProp(index, { field: $event })"
                         placeholder="Field"
-                        :disabled="!isSetup"
+                        v-on:keyup.native.enter="$emit('next')"
                     />
                     <wwEditorSelect
                         :options="directionOptions"
