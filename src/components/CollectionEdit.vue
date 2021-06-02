@@ -96,7 +96,7 @@
                         </a>
                     </template>
                     <wwEditorFormInput
-                        type="text"
+                        type="number"
                         name="limit"
                         placeholder="default: 15"
                         :value="endpoint.limit"
