@@ -1,3 +1,4 @@
-<iframe src="https://www.youtube-nocookie.com/embed/76CMCIW-wGk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ℹ️ You must first [create a custom integration](https://ghost.org/integrations/custom-integrations/) on your Ghost website. If you're stuck, please refer to [this guide](https://help.weweb.io/en/articles/5249214-how-to-connect-to-ghost).
 
-Get api key from your profile.
+- Enter the URL of your Ghost website
+- Enter the Content & Admin API key of the custom integration you want to use on your Ghost instance.
