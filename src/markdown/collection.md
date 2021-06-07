@@ -1,3 +1,5 @@
-<iframe src="https://www.youtube-nocookie.com/embed/76CMCIW-wGk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+1. You must first select the type of resource you want to fetch on your Ghost website. It can be: posts, authors, tags, pages or settings.
+2. Then select the method you want to use to fetch this data.
+3. Optionally, choose any extra data you want to include, the fields you want to fetch, and filtering and sorting.
 
-Select a table from a base to fetch your data.
+If you're stuck, please refer to [the Ghost API docs](https://ghost.org/docs/content-api/).
