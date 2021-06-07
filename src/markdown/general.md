@@ -1,4 +1,4 @@
-[Ghost](https://ghost.org/) is a fully open source, hackable platform for building and running a modern online publication.
+<a href="https://ghost.org/" target="_blank" class="ww-editor-link">Ghost is a fully open source, hackable platform for building and running a modern online publication.
 
 This plugin will let you:
 
