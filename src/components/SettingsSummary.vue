@@ -1,5 +1,5 @@
 <template>
-    <div class="ghost-settings-summary" v-if="isValid">
+    <div class="ghost-settings-summary">
         <wwEditorIcon name="link" class="ghost-settings-summary__icon"></wwEditorIcon>
         <span class="caption-m">{{ settings.privateData.url }}</span>
     </div>
@@ -8,22 +8,7 @@
 <script>
 export default {
     props: {
-        plugin: { type: Object, required: true },
         settings: { type: Object, required: true },
-    },
-    computed: {
-        isValid() {
-            const { contentApiKey, adminApiKey, url } = this.settings.privateData;
-            return !!contentApiKey && !!adminApiKey && !!url;
-        },
-    },
-    watch: {
-        isValid: {
-            immediate: true,
-            handler(value) {
-                this.$emit('update-is-valid', value);
-            },
-        },
     },
 };
 </script>

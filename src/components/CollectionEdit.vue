@@ -3,35 +3,34 @@
         <wwEditorFormRow label="Ressource" required>
             <wwEditorSelect
                 :options="ressourcesOptions"
-                :value="endpoint.ressource"
-                @input="setProp('ressource', $event)"
+                :model-value="endpoint.ressource"
                 placeholder="Select a ressource"
                 large
+                @update:modelValue="setProp('ressource', $event)"
             />
         </wwEditorFormRow>
         <div class="ghost-collection-edit__row">
             <wwEditorFormRow label="Method" required class="-full">
                 <wwEditorSelect
                     :options="methodsOptions"
-                    :value="endpoint.method"
-                    @change="setProp('method', $event)"
+                    :model-value="endpoint.method"
                     placeholder="Select a method"
                     large
+                    @change="setProp('method', $event)"
                 />
             </wwEditorFormRow>
-            <wwEditorFormRow :label="endpoint.method" required v-if="endpoint.method !== 'browse'" class="-full">
+            <wwEditorFormRow v-if="endpoint.method !== 'browse'" :label="endpoint.method" required class="-full">
                 <wwEditorFormInput
                     type="text"
                     name="param"
-                    :value="endpoint.param"
-                    @input="setProp('param', $event)"
+                    :model-value="endpoint.param"
                     :placeholder="endpoint.method"
-                    v-on:keyup.native.enter="$emit('next')"
                     large
+                    @update:modelValue="setProp('param', $event)"
                 />
             </wwEditorFormRow>
         </div>
-        <wwEditorFormRow label="Include" v-if="isSetup && endpoint.ressource !== 'settings'">
+        <wwEditorFormRow v-if="endpoint.ressource && endpoint.ressource !== 'settings'" label="Include">
             <div class="ghost-collection-edit__row">
                 <template v-if="endpoint.ressource === 'posts' || endpoint.ressource === 'pages'">
                     <div class="ghost-collection-edit__row m-bottom">
@@ -44,8 +43,8 @@
                     </div>
                 </template>
                 <div
-                    class="ghost-collection-edit__row m-bottom"
                     v-else-if="endpoint.ressource === 'authors' || endpoint.ressource === 'tags'"
+                    class="ghost-collection-edit__row m-bottom"
                 >
                     <wwManagerRadio v-model="endpoint.include.posts" />
                     <div class="caption-m">Count posts</div>
@@ -57,15 +56,14 @@
                 type="text"
                 name="fields"
                 placeholder="title, slug, url"
-                :value="endpoint.fields"
-                @input="setProp('fields', $event)"
-                v-on:keyup.native.enter="$emit('next')"
+                :model-value="endpoint.fields"
                 large
+                @update:modelValue="setProp('fields', $event)"
             />
         </wwEditorFormRow>
         <template v-if="endpoint.method === 'browse' && endpoint.ressource !== 'settings'">
             <wwEditorFormRow label="Filter" class="-full">
-                <template slot="append-label">
+                <template #append-label>
                     <a
                         class="ghost-collection-edit__link"
                         href="//ghost.org/docs/content-api/#syntax-reference"
@@ -78,15 +76,14 @@
                     type="text"
                     name="filter"
                     placeholder="featured:true"
-                    :value="endpoint.filterByFormula"
-                    @input="setProp('filterByFormula', $event)"
-                    v-on:keyup.native.enter="$emit('next')"
+                    :model-value="endpoint.filterByFormula"
                     large
+                    @update:modelValue="setProp('filterByFormula', $event)"
                 />
             </wwEditorFormRow>
             <div class="ghost-collection-edit__row">
                 <wwEditorFormRow label="Limit" class="-full">
-                    <template slot="append-label">
+                    <template #append-label>
                         <a
                             class="ghost-collection-edit__link"
                             href="//ghost.org/docs/content-api/#limit"
@@ -99,14 +96,13 @@
                         type="number"
                         name="limit"
                         placeholder="default: 15"
-                        :value="endpoint.limit"
-                        @input="setProp('limit', $event)"
-                        v-on:keyup.native.enter="$emit('next')"
+                        :model-value="endpoint.limit"
                         large
+                        @update:modelValue="setProp('limit', $event)"
                     />
                 </wwEditorFormRow>
                 <wwEditorFormRow label="Page" class="-full">
-                    <template slot="append-label">
+                    <template #append-label>
                         <a
                             class="ghost-collection-edit__link"
                             href="//ghost.org/docs/content-api/#page"
@@ -119,43 +115,45 @@
                         type="number"
                         name="page"
                         placeholder="default: first 15 record"
-                        :value="endpoint.page"
-                        @input="setProp('page', $event)"
-                        v-on:keyup.native.enter="$emit('next')"
+                        :model-value="endpoint.page"
                         large
+                        @update:modelValue="setProp('page', $event)"
                     />
                 </wwEditorFormRow>
             </div>
             <wwEditorFormRow label="Order">
-                <template slot="append-label">
+                <template #append-label>
                     <button
+                        type="button"
                         class="ww-editor-button -primary -small m-auto-left m-bottom"
                         @click="addOrder"
-                        :disabled="!isSetup"
                     >
                         Add a field to order by
                     </button>
                 </template>
                 <div
-                    class="ghost-collection-edit__row -space-between m-bottom"
                     v-for="(order, index) in endpoint.order"
                     :key="index"
+                    class="ghost-collection-edit__row -space-between m-bottom"
                 >
-                    <div class="label-xs" v-if="!index">Order by</div>
-                    <div class="label-xs" v-else>then by</div>
+                    <div v-if="!index" class="label-xs">Order by</div>
+                    <div v-else class="label-xs">then by</div>
                     <wwEditorFormInput
                         type="text"
-                        :value="order.field"
-                        @input="setOrderProp(index, { field: $event })"
+                        :model-value="order.field"
                         placeholder="Field"
-                        v-on:keyup.native.enter="$emit('next')"
+                        @update:modelValue="setOrderProp(index, { field: $event })"
                     />
                     <wwEditorSelect
                         :options="directionOptions"
-                        :value="order.direction"
-                        @input="setOrderProp(index, { direction: $event })"
+                        :model-value="order.direction"
+                        @update:modelValue="setOrderProp(index, { direction: $event })"
                     />
-                    <button class="ww-editor-button -tertiary -small -icon -red" @click="deleteOrder(index)">
+                    <button
+                        type="button"
+                        class="ww-editor-button -tertiary -small -icon -red"
+                        @click="deleteOrder(index)"
+                    >
                         <wwEditorIcon class="ww-editor-button-icon" name="delete" small />
                     </button>
                 </div>
@@ -167,9 +165,9 @@
 <script>
 export default {
     props: {
-        plugin: { type: Object, required: true },
         config: { type: Object, required: true },
     },
+    emits: ['update:config'],
     data() {
         return {
             ressourcesOptions: [
@@ -185,18 +183,7 @@ export default {
             ],
         };
     },
-    watch: {
-        isSetup: {
-            immediate: true,
-            handler(value) {
-                this.$emit('update-is-valid', value);
-            },
-        },
-    },
     computed: {
-        isSetup() {
-            return !!this.endpoint.ressource && !!this.endpoint.method;
-        },
         endpoint() {
             return {
                 ressource: undefined,
@@ -243,7 +230,7 @@ export default {
             this.setProp('order', orders);
         },
         setProp(key, value) {
-            this.$emit('update-config', { ...this.endpoint, [key]: value });
+            this.$emit('update:config', { ...this.endpoint, [key]: value });
         },
     },
 };
