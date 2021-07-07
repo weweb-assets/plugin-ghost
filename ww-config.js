@@ -5,7 +5,11 @@ module.exports = {
             edit: () => import('./src/components/SettingsEdit.vue'),
             summary: () => import('./src/components/SettingsSummary.vue'),
             getIsValid(settings) {
-                return !!settings.contentApiKey && !!settings.adminApiKey && !!settings.url;
+                return (
+                    !!settings.privateData.contentApiKey &&
+                    !!settings.privateData.adminApiKey &&
+                    !!settings.privateData.url
+                );
             },
         },
         collection: {
