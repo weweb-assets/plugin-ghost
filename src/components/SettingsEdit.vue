@@ -7,7 +7,7 @@
                 placeholder="https://my-ghost.ghost.io"
                 :model-value="settings.privateData.url"
                 large
-                @update:modelValue="setPrivateProp('url', $event)"
+                @update:modelValue="saveUrl"
             />
         </wwEditorFormRow>
         <wwEditorFormRow required label="Content API key">
@@ -53,6 +53,9 @@ export default {
         },
     },
     methods: {
+        saveUrl(value) {
+            this.setPrivateProp('url', value.trim().replace(/\/+$/g, ''));
+        },
         setPrivateProp(key, value) {
             this.$emit('update:settings', {
                 ...this.settings,
