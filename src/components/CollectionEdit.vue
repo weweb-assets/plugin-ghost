@@ -1,7 +1,7 @@
 <template>
     <div class="ghost-collection-edit">
         <wwEditorFormRow label="Ressource" required>
-            <wwEditorSelect
+            <wwEditorInputTextSelect
                 :options="ressourcesOptions"
                 :model-value="endpoint.ressource"
                 placeholder="Select a ressource"
@@ -11,7 +11,7 @@
         </wwEditorFormRow>
         <div class="ghost-collection-edit__row">
             <wwEditorFormRow label="Method" required class="-full">
-                <wwEditorSelect
+                <wwEditorInputTextSelect
                     :options="methodsOptions"
                     :model-value="endpoint.method"
                     placeholder="Select a method"
@@ -20,7 +20,7 @@
                 />
             </wwEditorFormRow>
             <wwEditorFormRow v-if="endpoint.method !== 'browse'" :label="endpoint.method" required class="-full">
-                <wwEditorFormInput
+                <wwEditorInputText
                     type="text"
                     name="param"
                     :model-value="endpoint.param"
@@ -34,11 +34,11 @@
             <div class="ghost-collection-edit__row">
                 <template v-if="endpoint.ressource === 'posts' || endpoint.ressource === 'pages'">
                     <div class="ghost-collection-edit__row m-bottom">
-                        <wwManagerRadio v-model="endpoint.include.authors" />
+                        <wwEditorInputSwitch v-model="endpoint.include.authors" />
                         <div class="caption-m">Authors</div>
                     </div>
                     <div class="ghost-collection-edit__row m-bottom">
-                        <wwManagerRadio v-model="endpoint.include.tags" />
+                        <wwEditorInputSwitch v-model="endpoint.include.tags" />
                         <div class="caption-m">Tags</div>
                     </div>
                 </template>
@@ -46,13 +46,13 @@
                     v-else-if="endpoint.ressource === 'authors' || endpoint.ressource === 'tags'"
                     class="ghost-collection-edit__row m-bottom"
                 >
-                    <wwManagerRadio v-model="endpoint.include.posts" />
+                    <wwEditorInputSwitch v-model="endpoint.include.posts" />
                     <div class="caption-m">Count posts</div>
                 </div>
             </div>
         </wwEditorFormRow>
         <wwEditorFormRow label="Fields">
-            <wwEditorFormInput
+            <wwEditorInputText
                 type="text"
                 name="fields"
                 placeholder="title, slug, url"
@@ -72,7 +72,7 @@
                         Find it here
                     </a>
                 </template>
-                <wwEditorFormInput
+                <wwEditorInputText
                     type="text"
                     name="filter"
                     placeholder="featured:true"
@@ -92,7 +92,7 @@
                             Find it here
                         </a>
                     </template>
-                    <wwEditorFormInput
+                    <wwEditorInputText
                         type="number"
                         name="limit"
                         placeholder="default: 15"
@@ -111,7 +111,7 @@
                             Find it here
                         </a>
                     </template>
-                    <wwEditorFormInput
+                    <wwEditorInputText
                         type="number"
                         name="page"
                         placeholder="default: first 15 record"
@@ -138,13 +138,13 @@
                 >
                     <div v-if="!index" class="label-xs">Order by</div>
                     <div v-else class="label-xs">then by</div>
-                    <wwEditorFormInput
+                    <wwEditorInputText
                         type="text"
                         :model-value="order.field"
                         placeholder="Field"
                         @update:modelValue="setOrderProp(index, { field: $event })"
                     />
-                    <wwEditorSelect
+                    <wwEditorInputTextSelect
                         :options="directionOptions"
                         :model-value="order.direction"
                         @update:modelValue="setOrderProp(index, { direction: $event })"
