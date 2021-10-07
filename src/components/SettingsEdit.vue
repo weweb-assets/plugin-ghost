@@ -1,7 +1,7 @@
 <template>
     <div class="ghost-settings-edit">
         <wwEditorFormRow required label="URL">
-            <wwEditorFormInput
+            <wwEditorInputText
                 type="text"
                 name="url"
                 placeholder="https://my-ghost.ghost.io"
@@ -14,7 +14,7 @@
             <template v-if="settings.privateData.url" #append-label>
                 <a class="ghost-settings-edit__link" :href="integrationUrl" target="_blank">Find it here</a>
             </template>
-            <wwEditorFormInput
+            <wwEditorInputText
                 type="text"
                 name="content-api-key"
                 placeholder="Key"
@@ -27,7 +27,7 @@
             <template v-if="settings.privateData.url" #append-label>
                 <a class="ghost-settings-edit__link" :href="integrationUrl" target="_blank">Find it here</a>
             </template>
-            <wwEditorFormInput
+            <wwEditorInputText
                 type="text"
                 name="admin-api-key"
                 placeholder="Key"
