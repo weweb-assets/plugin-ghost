@@ -2,4 +2,4 @@
 
 This plugin will let you:
 
-- Use Airtable bases as a collection source in WeWeb
+- Use Ghost articles, authors and pages as a collection source in WeWeb
