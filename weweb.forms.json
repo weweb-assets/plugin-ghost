@@ -76,12 +76,7 @@
                         "label": "Read by ID",
                         "visibleWhen": {
                             "field": "ressource",
-                            "oneOf": [
-                                "posts",
-                                "pages",
-                                "authors",
-                                "tags"
-                            ]
+                            "oneOf": ["posts", "pages", "authors", "tags"]
                         }
                     },
                     {
@@ -89,12 +84,7 @@
                         "label": "Read by slug",
                         "visibleWhen": {
                             "field": "ressource",
-                            "oneOf": [
-                                "posts",
-                                "pages",
-                                "authors",
-                                "tags"
-                            ]
+                            "oneOf": ["posts", "pages", "authors", "tags"]
                         }
                     }
                 ],
@@ -106,10 +96,7 @@
                 "type": "text",
                 "visibleWhen": {
                     "field": "method",
-                    "oneOf": [
-                        "id",
-                        "slug"
-                    ]
+                    "oneOf": ["id", "slug"]
                 }
             },
             {
@@ -119,10 +106,7 @@
                 "memberOf": "include",
                 "visibleWhen": {
                     "field": "ressource",
-                    "oneOf": [
-                        "posts",
-                        "pages"
-                    ]
+                    "oneOf": ["posts", "pages"]
                 },
                 "initial": false
             },
@@ -133,10 +117,7 @@
                 "memberOf": "include",
                 "visibleWhen": {
                     "field": "ressource",
-                    "oneOf": [
-                        "posts",
-                        "pages"
-                    ]
+                    "oneOf": ["posts", "pages"]
                 },
                 "initial": false
             },
@@ -147,10 +128,7 @@
                 "memberOf": "include",
                 "visibleWhen": {
                     "field": "ressource",
-                    "oneOf": [
-                        "authors",
-                        "tags"
-                    ]
+                    "oneOf": ["authors", "tags"]
                 },
                 "initial": false
             },
@@ -171,12 +149,7 @@
                     },
                     {
                         "field": "ressource",
-                        "oneOf": [
-                            "posts",
-                            "pages",
-                            "authors",
-                            "tags"
-                        ]
+                        "oneOf": ["posts", "pages", "authors", "tags"]
                     }
                 ],
                 "help": {
@@ -199,12 +172,7 @@
                     },
                     {
                         "field": "ressource",
-                        "oneOf": [
-                            "posts",
-                            "pages",
-                            "authors",
-                            "tags"
-                        ]
+                        "oneOf": ["posts", "pages", "authors", "tags"]
                     }
                 ],
                 "help": {
@@ -227,12 +195,7 @@
                     },
                     {
                         "field": "ressource",
-                        "oneOf": [
-                            "posts",
-                            "pages",
-                            "authors",
-                            "tags"
-                        ]
+                        "oneOf": ["posts", "pages", "authors", "tags"]
                     }
                 ],
                 "help": {
@@ -255,12 +218,7 @@
                     },
                     {
                         "field": "ressource",
-                        "oneOf": [
-                            "posts",
-                            "pages",
-                            "authors",
-                            "tags"
-                        ]
+                        "oneOf": ["posts", "pages", "authors", "tags"]
                     }
                 ],
                 "initial": [],
