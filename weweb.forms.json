@@ -1,0 +1,309 @@
+{
+    "schemaVersion": 1,
+    "features": {
+        "datasource": true
+    },
+    "settings": {
+        "fields": [
+            {
+                "key": "url",
+                "label": "URL",
+                "type": "secret",
+                "storage": "privateData",
+                "required": true,
+                "normalize": "trimUrl",
+                "placeholder": "https://my-ghost.ghost.io"
+            },
+            {
+                "key": "contentApiKey",
+                "label": "Content API key",
+                "type": "secret",
+                "required": true,
+                "storage": "privateData"
+            },
+            {
+                "key": "adminApiKey",
+                "label": "Admin API key",
+                "type": "secret",
+                "required": true,
+                "storage": "privateData"
+            }
+        ],
+        "managementLink": "ghost.integrations"
+    },
+    "collection": {
+        "fields": [
+            {
+                "key": "ressource",
+                "label": "Resource",
+                "type": "choice",
+                "required": true,
+                "choices": [
+                    {
+                        "value": "posts",
+                        "label": "Posts"
+                    },
+                    {
+                        "value": "authors",
+                        "label": "Authors"
+                    },
+                    {
+                        "value": "tags",
+                        "label": "Tags"
+                    },
+                    {
+                        "value": "pages",
+                        "label": "Pages"
+                    },
+                    {
+                        "value": "settings",
+                        "label": "Settings"
+                    }
+                ]
+            },
+            {
+                "key": "method",
+                "label": "Method",
+                "type": "choice",
+                "required": true,
+                "choices": [
+                    {
+                        "value": "browse",
+                        "label": "Browse"
+                    },
+                    {
+                        "value": "id",
+                        "label": "Read by ID",
+                        "visibleWhen": {
+                            "field": "ressource",
+                            "oneOf": [
+                                "posts",
+                                "pages",
+                                "authors",
+                                "tags"
+                            ]
+                        }
+                    },
+                    {
+                        "value": "slug",
+                        "label": "Read by slug",
+                        "visibleWhen": {
+                            "field": "ressource",
+                            "oneOf": [
+                                "posts",
+                                "pages",
+                                "authors",
+                                "tags"
+                            ]
+                        }
+                    }
+                ],
+                "initial": "browse"
+            },
+            {
+                "key": "param",
+                "label": "ID or slug",
+                "type": "text",
+                "visibleWhen": {
+                    "field": "method",
+                    "oneOf": [
+                        "id",
+                        "slug"
+                    ]
+                }
+            },
+            {
+                "key": "authors",
+                "label": "Include authors",
+                "type": "boolean",
+                "memberOf": "include",
+                "visibleWhen": {
+                    "field": "ressource",
+                    "oneOf": [
+                        "posts",
+                        "pages"
+                    ]
+                },
+                "initial": false
+            },
+            {
+                "key": "tags",
+                "label": "Include tags",
+                "type": "boolean",
+                "memberOf": "include",
+                "visibleWhen": {
+                    "field": "ressource",
+                    "oneOf": [
+                        "posts",
+                        "pages"
+                    ]
+                },
+                "initial": false
+            },
+            {
+                "key": "posts",
+                "label": "Count posts",
+                "type": "boolean",
+                "memberOf": "include",
+                "visibleWhen": {
+                    "field": "ressource",
+                    "oneOf": [
+                        "authors",
+                        "tags"
+                    ]
+                },
+                "initial": false
+            },
+            {
+                "key": "fields",
+                "label": "Fields",
+                "type": "text",
+                "placeholder": "title, slug, url"
+            },
+            {
+                "key": "filterByFormula",
+                "label": "Filter",
+                "type": "text",
+                "conditions": [
+                    {
+                        "field": "method",
+                        "equals": "browse"
+                    },
+                    {
+                        "field": "ressource",
+                        "oneOf": [
+                            "posts",
+                            "pages",
+                            "authors",
+                            "tags"
+                        ]
+                    }
+                ],
+                "help": {
+                    "text": "Ghost Content API documentation.",
+                    "link": {
+                        "label": "Find it here",
+                        "url": "https://ghost.org/docs/content-api/#syntax-reference"
+                    }
+                },
+                "placeholder": "featured:true"
+            },
+            {
+                "key": "limit",
+                "label": "Limit",
+                "type": "number",
+                "conditions": [
+                    {
+                        "field": "method",
+                        "equals": "browse"
+                    },
+                    {
+                        "field": "ressource",
+                        "oneOf": [
+                            "posts",
+                            "pages",
+                            "authors",
+                            "tags"
+                        ]
+                    }
+                ],
+                "help": {
+                    "text": "Ghost Content API documentation.",
+                    "link": {
+                        "label": "Find it here",
+                        "url": "https://ghost.org/docs/content-api/#limit"
+                    }
+                },
+                "placeholder": "15"
+            },
+            {
+                "key": "page",
+                "label": "Page",
+                "type": "number",
+                "conditions": [
+                    {
+                        "field": "method",
+                        "equals": "browse"
+                    },
+                    {
+                        "field": "ressource",
+                        "oneOf": [
+                            "posts",
+                            "pages",
+                            "authors",
+                            "tags"
+                        ]
+                    }
+                ],
+                "help": {
+                    "text": "Ghost Content API documentation.",
+                    "link": {
+                        "label": "Find it here",
+                        "url": "https://ghost.org/docs/content-api/#page"
+                    }
+                },
+                "placeholder": "1"
+            },
+            {
+                "key": "order",
+                "label": "Order",
+                "type": "list",
+                "conditions": [
+                    {
+                        "field": "method",
+                        "equals": "browse"
+                    },
+                    {
+                        "field": "ressource",
+                        "oneOf": [
+                            "posts",
+                            "pages",
+                            "authors",
+                            "tags"
+                        ]
+                    }
+                ],
+                "initial": [],
+                "item": {
+                    "type": "record",
+                    "fields": [
+                        {
+                            "key": "field",
+                            "label": "Field",
+                            "type": "text",
+                            "initial": ""
+                        },
+                        {
+                            "key": "direction",
+                            "label": "Direction",
+                            "type": "choice",
+                            "initial": "asc",
+                            "choices": [
+                                {
+                                    "value": "asc",
+                                    "label": "Asc"
+                                },
+                                {
+                                    "value": "desc",
+                                    "label": "Desc"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ],
+        "summary": [
+            {
+                "field": "method",
+                "label": "Method",
+                "empty": "-"
+            },
+            {
+                "field": "ressource",
+                "label": "Resource",
+                "empty": "-"
+            }
+        ]
+    }
+}
