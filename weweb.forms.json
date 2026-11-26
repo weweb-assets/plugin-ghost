@@ -13,7 +13,9 @@
                 "required": true,
                 "normalize": "trimUrl",
                 "placeholder": "https://my-ghost.ghost.io",
-                "help": "When you change the site URL, enter the Content API key and Admin API key for that site."
+                "help": {
+                    "text": "When you change the site URL, enter the Content API key and Admin API key for that site."
+                }
             },
             {
                 "key": "contentApiKey",
